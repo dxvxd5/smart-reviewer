@@ -30,6 +30,75 @@
   --serif: "Newsreader", Georgia, serif;
   --sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 
+  /* Type sizes (px) */
+  --fs-10: 10px;
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-17: 17px;
+  --fs-18: 18px;
+  --fs-19: 19px;
+  --fs-20: 20px;
+  --fs-22: 22px;
+  --fs-24: 24px;
+  --fs-28: 28px;
+
+  /* Line heights */
+  --lh-1: 1;
+  --lh-120: 1.2;
+  --lh-125: 1.25;
+  --lh-130: 1.3;
+  --lh-140: 1.4;
+  --lh-145: 1.45;
+  --lh-150: 1.5;
+  --lh-155: 1.55;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Letter spacing */
+  --ls-tight: -0.01em;
+  --ls-tightish: -0.005em;
+  --ls-normal: 0;
+  --ls-wide: 0.06em;
+  --ls-wider: 0.1em;
+  --ls-widest: 0.12em;
+
+  /* Extra ink tones */
+  --ink-medium: #3a342c;
+  --ink-dim: #6b6359;
+
+  /* Row surfaces */
+  --surface-row-hover: #faf7ee;
+  --surface-row-zebra: #fbfaf3;
+
+  /* Error surfaces */
+  --surface-error: #fdf3ef;
+  --rule-error: #f0d4ca;
+  --ink-error: #7a3322;
+
+  /* Misc surfaces / overlays */
+  --skeleton-shimmer: #f5f1e5;
+  --backdrop: rgba(20, 18, 15, 0.35);
+  --tabbar-bg: rgba(251, 249, 244, 0.92);
+
+  /* Toast palette */
+  --toast-bg: #3a201a;
+  --toast-divider: rgba(255, 255, 255, 0.12);
+  --toast-divider-strong: rgba(255, 255, 255, 0.2);
+  --toast-muted: rgba(255, 255, 255, 0.6);
+
+  /* Shadows */
+  --shadow-side: -20px 0 40px rgba(0, 0, 0, 0.12);
+  --shadow-sheet: 0 -20px 40px rgba(0, 0, 0, 0.18);
+  --shadow-toast: 0 12px 30px rgba(0, 0, 0, 0.25);
+
   /* Spacing scale */
   --sp-1: 4px;
   --sp-2: 8px;
@@ -75,6 +144,6 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--fs-14);
+  line-height: var(--lh-150);
 }
