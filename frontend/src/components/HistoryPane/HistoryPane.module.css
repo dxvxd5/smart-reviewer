@@ -21,8 +21,8 @@
   background: transparent;
   color: var(--ink2);
   border: 1px solid var(--rule);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: var(--fs-12);
+  font-weight: var(--fw-medium);
   transition: all var(--d-fast);
 }
 .chip:hover {
@@ -51,7 +51,7 @@
   border-color: var(--ink);
 }
 .chipCount {
-  font-size: 11px;
+  font-size: var(--fs-11);
   opacity: 0.7;
   font-variant-numeric: tabular-nums;
 }
@@ -69,13 +69,13 @@
   grid-template-columns: 1fr 130px 60px;
   gap: var(--sp-3);
   padding: 11px 16px;
-  background: #faf7ee;
+  background: var(--surface-row-hover);
   border-bottom: 1px solid var(--rule);
-  font-size: 10.5px;
+  font-size: var(--fs-11);
   color: var(--ink3);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-wide);
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   position: sticky;
   top: 0;
   z-index: 2;
@@ -101,7 +101,7 @@
   border-bottom: none;
 }
 .row:hover {
-  background: #fbfaf3;
+  background: var(--surface-row-zebra);
 }
 .rowCompact {
   padding-top: 7px;
@@ -113,35 +113,35 @@
 }
 .rowTitle {
   font-family: var(--serif);
-  font-size: 14px;
-  line-height: 1.3;
+  font-size: var(--fs-14);
+  line-height: var(--lh-130);
   color: var(--ink);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .rowCompact .rowTitle {
-  font-size: 13px;
+  font-size: var(--fs-13);
 }
 .rowMeta {
   display: flex;
   align-items: center;
   gap: 5px;
   margin-top: 3px;
-  font-size: 11px;
+  font-size: var(--fs-11);
   color: var(--ink3);
 }
 .rowCompact .rowMeta {
   margin-top: 1px;
-  font-size: 10.5px;
+  font-size: var(--fs-11);
 }
 .rowFresh {
   color: var(--accent);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 .rowDate {
-  font-size: 12px;
+  font-size: var(--fs-12);
   color: var(--ink3);
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -150,19 +150,19 @@
 .filterEmpty {
   padding: 28px 18px;
   text-align: center;
-  font-size: 13px;
-  color: #6b6359;
+  font-size: var(--fs-13);
+  color: var(--ink-dim);
 }
 .linkBtn {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-size: 13px;
+  font-size: var(--fs-13);
 }
 
 .foot {
   margin-top: 10px;
-  font-size: 11.5px;
+  font-size: var(--fs-12);
   color: var(--ink3);
   text-align: center;
   display: flex;
@@ -197,15 +197,15 @@
 }
 .emptyTitle {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 19px;
-  letter-spacing: -0.005em;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-19);
+  letter-spacing: var(--ls-tightish);
   color: var(--ink);
 }
 .emptySub {
-  font-size: 13.5px;
+  font-size: var(--fs-14);
   color: var(--ink2);
-  line-height: 1.55;
+  line-height: var(--lh-155);
   text-wrap: pretty;
   max-width: 320px;
 }
@@ -215,8 +215,8 @@
   color: var(--paper);
   padding: 9px 18px;
   border-radius: var(--r-pill);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--fs-13);
+  font-weight: var(--fw-medium);
 }
 
 .sectionHead {
@@ -228,12 +228,12 @@
 }
 .sectionTitle {
   font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--fs-18);
+  font-weight: var(--fw-semibold);
   white-space: nowrap;
 }
 .sectionMeta {
-  font-size: 12px;
+  font-size: var(--fs-12);
   color: var(--ink3);
   white-space: nowrap;
 }
