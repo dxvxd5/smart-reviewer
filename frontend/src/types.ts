@@ -23,6 +23,8 @@ export interface Analysis {
   sentiment: Sentiment;
   /** Confidence score in [0, 1]. */
   score: number;
+  /** Optional one-sentence rationale for the sentiment. */
+  reasoning?: string | null;
 }
 
 /** Response from POST /api/articles/analyze. */
