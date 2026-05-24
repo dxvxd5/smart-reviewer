@@ -52,7 +52,6 @@ export function App() {
   const [filter, setFilter] = useState<HistoryFilter>("all");
   const [selected, setSelected] = useState<HistoryItem | null>(null);
   const [cardStates, setCardStates] = useState<Record<string, CardState>>({});
-  const [cacheHits, setCacheHits] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -92,7 +91,6 @@ export function App() {
     analyze.mutate(article, {
       onSuccess: (res) => {
         if (res.cached) {
-          setCacheHits((n) => n + 1);
           setCard(article.url, {
             state: "cached",
             analysis: res.analysis,
@@ -147,8 +145,6 @@ export function App() {
         loading={search.isFetching && query.trim().length >= 2}
         inputRef={inputRef}
         isMobile={isMobile}
-        historyCount={historyItems.length}
-        cacheHits={cacheHits}
       />
 
       <main className={styles.main}>

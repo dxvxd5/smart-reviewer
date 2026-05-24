@@ -138,7 +138,11 @@ export function HistoryPane({
         <h2 id={headingId} className={styles.sectionTitle}>
           Your history
         </h2>
-        <span className={styles.sectionMeta}>{totalCount} articles</span>
+        <span className={styles.sectionMeta}>
+          {filter === "all"
+            ? `${totalCount} ${totalCount === 1 ? "article" : "articles"}`
+            : `${history.length} of ${totalCount} articles`}
+        </span>
       </div>
 
       <div className={styles.chips} role="group" aria-label="Filter by sentiment">

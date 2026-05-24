@@ -304,8 +304,6 @@ export function PrimitivesPreview() {
           query={searchValue}
           onQueryChange={setSearchValue}
           onClear={() => setSearchValue("")}
-          historyCount={12}
-          cacheHits={4}
         />
         <div style={label}>Header — mobile</div>
         <Header
@@ -313,8 +311,6 @@ export function PrimitivesPreview() {
           onQueryChange={setSearchValue}
           onClear={() => setSearchValue("")}
           isMobile
-          historyCount={12}
-          cacheHits={4}
         />
       </section>
 

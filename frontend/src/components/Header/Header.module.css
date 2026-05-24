@@ -1,7 +1,7 @@
 .root {
   padding: 18px var(--sp-6) 14px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 28px;
   align-items: center;
   flex-shrink: 0;

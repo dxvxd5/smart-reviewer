@@ -10,8 +10,6 @@ export interface HeaderProps {
   loading?: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
   isMobile?: boolean;
-  historyCount: number;
-  cacheHits: number;
 }
 
 export function Header({
@@ -21,8 +19,6 @@ export function Header({
   loading = false,
   inputRef,
   isMobile = false,
-  historyCount,
-  cacheHits,
 }: HeaderProps) {
   return (
     <header className={cx(styles.root, isMobile && styles.mobile)}>
@@ -43,16 +39,6 @@ export function Header({
           inputRef={inputRef}
           variant={isMobile ? "mobile" : "desktop"}
         />
-      </div>
-
-      <div className={styles.counter} aria-live="polite">
-        {historyCount} read
-        {cacheHits > 0 && (
-          <>
-            {" · "}
-            <span className={styles.counterCache}>{cacheHits} instant</span>
-          </>
-        )}
       </div>
     </header>
   );
