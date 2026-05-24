@@ -104,6 +104,18 @@ Errors use a uniform shape: `{ error: { code, message } }` with HTTP statuses
 `400` (validation), `429` (upstream rate-limit), `502` (upstream failure),
 `500` (internal).
 
+## Core types
+
+The frontend mirrors these in its own `types.ts` so both sides stay in sync.
+
+| Type              | Shape                                                     | What it is                                                                                                                                                                                 |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Article`         | `{ url, title, description, source, publishedAt, image }` | A news article as it comes back from GNews and as it's stored in MongoDB. `url` is the unique key — the cache, the analyze request body, and the Mongoose unique index all hang off of it. |
+| `Analysis`        | `{ summary, sentiment, score, reasoning? }`               | The Gemini output for one article. `sentiment` is `"positive" \| "neutral" \| "negative"`, `score` is a signed number in `[-1, 1]`, `reasoning` is a short rationale (kept for debugging). |
+| `Sentiment`       | `"positive" \| "neutral" \| "negative"`                   | The categorical label rendered as the badge on cards and history rows.                                                                                                                     |
+| `AnalyzeResponse` | `{ article, analysis, cached, originallyAnalyzedAt }`     | What `POST /api/articles/analyze` returns. `cached: true` means we served from MongoDB without calling Gemini; `originallyAnalyzedAt` is when the analysis was first persisted.            |
+| `HistoryItem`     | `AnalyzeResponse & { id }`                                | A row in the History pane — same shape as an analyze response plus the Mongo document id for React keys.                                                                                   |
+
 ## Project structure
 
 ```
