@@ -1,6 +1,7 @@
 import { SENT } from "../../lib/sentiment";
 import type { Sentiment } from "../../types";
 import styles from "./SentimentPill.module.css";
+import { cx } from "../../lib/cx";
 
 type Variant = "soft" | "outline" | "dot";
 type Size = "sm" | "lg";
@@ -35,12 +36,12 @@ export function SentimentPill({
   variant = "soft",
   size = "sm",
 }: SentimentPillProps) {
-  const classes = [
+  const classes = cx(
     styles.pill,
     VARIANT_CLASS[variant],
     SIZE_CLASS[size],
     SENTIMENT_CLASS[sentiment],
-  ].join(" ");
+  );
 
   return (
     <span className={classes}>
