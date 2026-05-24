@@ -130,6 +130,12 @@
   text-wrap: pretty;
 }
 
+.published {
+  margin-top: -10px;
+  font-size: var(--fs-12);
+  color: var(--ink3);
+}
+
 .sentiment {
   display: flex;
   align-items: center;

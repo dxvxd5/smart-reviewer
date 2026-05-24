@@ -58,7 +58,8 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
   const { article, analysis } = displayItem;
   const s = SENT[analysis.sentiment];
   const titleId = `drawer-title-${displayItem.id}`;
-  const date = relativeTime(displayItem.originallyAnalyzedAt);
+  const publishedAt = relativeTime(article.publishedAt);
+  const analyzedAt = relativeTime(displayItem.originallyAnalyzedAt);
   const domain = domainFromUrl(article.url);
 
   const sentCls =
@@ -107,7 +108,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
           <span className={styles.sep} aria-hidden="true">
             ·
           </span>
-          <span className={styles.date}>{date}</span>
+          <span className={styles.date}>Analyzed {analyzedAt}</span>
           <button
             type="button"
             className={styles.close}
@@ -130,6 +131,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
           <h2 id={titleId} className={styles.title}>
             {article.title}
           </h2>
+          <div className={styles.published}>Published {publishedAt}</div>
 
           <div className={cx(styles.sentiment, sentCls)}>
             <div className={styles.sentimentLabel}>SENTIMENT</div>
