@@ -5,6 +5,7 @@ import { SENT } from "../../lib/sentiment";
 import { domainFromUrl } from "../../lib/url";
 import { relativeTime } from "../../lib/relativeTime";
 import styles from "./HistoryPane.module.css";
+import { cx } from "../../lib/cx";
 
 export type HistoryFilter = "all" | Sentiment;
 
@@ -107,9 +108,7 @@ export function HistoryPane({
                 : f.color === "neg"
                   ? styles.chipNeg
                   : "";
-          const cls = [styles.chip, active ? styles.chipActive : "", colorCls]
-            .filter(Boolean)
-            .join(" ");
+          const cls = cx(styles.chip, active && styles.chipActive, colorCls);
           return (
             <button
               key={f.k}
@@ -148,7 +147,7 @@ export function HistoryPane({
             const date = relativeTime(h.originallyAnalyzedAt);
             const fresh = date === "Just now";
             const domain = domainFromUrl(h.article.url);
-            const rowCls = `${styles.row} ${density === "compact" ? styles.rowCompact : ""}`.trim();
+            const rowCls = cx(styles.row, density === "compact" && styles.rowCompact);
             const scoreSign = h.analysis.score > 0 ? "+" : "";
             return (
               <button
