@@ -6,6 +6,14 @@ MongoDB so repeated lookups are free.
 
 Built for the Aries case study.
 
+**Live:**
+
+- Frontend → <https://smart-reviewer-frontend.vercel.app>
+- Backend health → <https://smart-reviewer-api-qeqr.onrender.com/api/health>
+
+> Note: the backend runs on Render's free tier, so the first request after
+> ~15 min of idle takes ~30 s to cold-start.
+
 ## Stack
 
 | Layer    | Choice                                                      |
@@ -134,10 +142,37 @@ frontend/
     styles/        # tokens (base.css), animations, sr-only
 ```
 
+## Deployment
+
+The live setup uses **Render** (backend, free tier), **Vercel** (frontend), and
+**MongoDB Atlas** (database, free tier).
+
+**Render web service:**
+
+| Field          | Value                                                            |
+| -------------- | ---------------------------------------------------------------- |
+| Root Directory | _(empty — uses repo root for npm workspaces)_                    |
+| Build Command  | `npm install --include=dev && npm run build --workspace=backend` |
+| Start Command  | `npm run start --workspace=backend`                              |
+| Env vars       | `MONGODB_URI`, `GNEWS_API_KEY`, `GEMINI_API_KEY`, `CORS_ORIGIN`  |
+
+`--include=dev` matters: Render sets `NODE_ENV=production`, which makes
+`npm install` skip `devDependencies` by default — and `typescript`, `@types/*`
+live there.
+
+**Vercel project:**
+
+| Field            | Value                                        |
+| ---------------- | -------------------------------------------- |
+| Root Directory   | `frontend`                                   |
+| Framework Preset | Vite (auto-detected)                         |
+| Env vars         | `VITE_API_BASE_URL` = the Render backend URL |
+
+Set `CORS_ORIGIN` on Render to the Vercel URL (comma-separated if you want to
+allow multiple — preview URLs, localhost, etc.).
+
 ## Notes — what I'd do with more time
 
-- **Deploy** to Render (backend) + Vercel (frontend) + Atlas (DB). The README
-  is install-ready in the meantime, as the brief allows.
 - **Authentication & per-user history**: today history is global (single shared
   collection). With more time I'd add email/password or magic-link auth (e.g.
   Better-Auth or Clerk), scope `Article` documents by `userId`, and gate the
