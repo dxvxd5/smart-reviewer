@@ -2,6 +2,9 @@ import express, { type Request, type Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { env } from "./config/env.js";
+import { errorHandler, notFoundHandler } from "./middleware/error.js";
+import { newsRouter } from "./routes/news.js";
+import { articlesRouter } from "./routes/articles.js";
 
 async function bootstrap() {
   await mongoose.connect(env.MONGODB_URI);
@@ -21,9 +24,12 @@ async function bootstrap() {
     });
   });
 
-  // Routes (to be added in Phase 2)
-  // app.use("/api/news", newsRouter);
-  // app.use("/api/articles", articlesRouter);
+  // Routes
+  app.use("/api/news", newsRouter);
+  app.use("/api/articles", articlesRouter);
+
+  app.use(notFoundHandler);
+  app.use(errorHandler);
 
   app.listen(env.PORT, () => {
     console.log(`🚀 Backend listening on http://localhost:${env.PORT}`);
