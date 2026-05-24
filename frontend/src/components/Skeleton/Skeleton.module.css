@@ -1,7 +1,7 @@
 .skeleton {
   display: block;
   border-radius: var(--r-sm);
-  background: linear-gradient(90deg, var(--rule) 0%, #f5f1e5 50%, var(--rule) 100%);
+  background: linear-gradient(90deg, var(--rule) 0%, var(--skeleton-shimmer) 50%, var(--rule) 100%);
   background-size: 200% 100%;
   animation: var(--anim-shimmer) 1.4s ease-in-out infinite;
 }
