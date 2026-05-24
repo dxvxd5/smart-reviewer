@@ -12,7 +12,19 @@ async function bootstrap() {
 
   const app = express();
 
-  app.use(cors({ origin: env.CORS_ORIGIN }));
+  const allowedOrigins = env.CORS_ORIGIN.split(",")
+    .map((o) => o.trim())
+    .filter(Boolean);
+  app.use(
+    cors({
+      origin: (origin, cb) => {
+        // Allow non-browser callers (curl, health checks) with no Origin header.
+        if (!origin) return cb(null, true);
+        if (allowedOrigins.includes(origin)) return cb(null, true);
+        return cb(new Error(`Origin ${origin} not allowed by CORS`));
+      },
+    }),
+  );
   app.use(express.json({ limit: "1mb" }));
 
   app.get("/api/health", (_req: Request, res: Response) => {
