@@ -1,0 +1,4 @@
+.spinner {
+  animation: var(--anim-spin) 0.9s linear infinite;
+  flex-shrink: 0;
+}
