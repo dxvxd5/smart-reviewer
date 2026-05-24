@@ -22,24 +22,24 @@
 .markError {
   background: var(--neg-soft);
   color: var(--neg);
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--fs-28);
+  font-weight: var(--fw-bold);
   font-family: var(--sans);
 }
 
 .title {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 24px;
-  letter-spacing: -0.01em;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-24);
+  letter-spacing: var(--ls-tight);
   color: var(--ink);
   margin-bottom: var(--sp-2);
 }
 
 .sub {
-  font-size: 14px;
+  font-size: var(--fs-14);
   color: var(--ink2);
-  line-height: 1.5;
+  line-height: var(--lh-150);
   text-wrap: pretty;
   margin-bottom: 22px;
 }
