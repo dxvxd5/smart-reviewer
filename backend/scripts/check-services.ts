@@ -55,7 +55,7 @@ async function checkGemini() {
   try {
     const ai = new GoogleGenerativeAI(key);
     const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
-    const result = await model.generateContent('Reply with the single word: pong');
+    const result = await model.generateContent("Reply with the single word: pong");
     const text = result.response.text().trim();
     ok(`Gemini responded ("${text.slice(0, 40)}")`);
   } catch (err) {
