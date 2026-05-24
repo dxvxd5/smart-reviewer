@@ -1,6 +1,7 @@
 import type { HistoryItem, Sentiment } from "../../types";
 import { Favicon } from "../Favicon/Favicon";
 import { SentimentPill } from "../SentimentPill/SentimentPill";
+import { Skeleton } from "../Skeleton/Skeleton";
 import { SENT } from "../../lib/sentiment";
 import { domainFromUrl } from "../../lib/url";
 import { relativeTime } from "../../lib/relativeTime";
@@ -41,6 +42,7 @@ export interface HistoryPaneProps {
   isMobile?: boolean;
   onSwitchToSearch?: () => void;
   headingId?: string;
+  loading?: boolean;
 }
 
 export function HistoryPane({
@@ -55,7 +57,43 @@ export function HistoryPane({
   isMobile = false,
   onSwitchToSearch,
   headingId,
+  loading = false,
 }: HistoryPaneProps) {
+  if (loading && totalCount === 0) {
+    return (
+      <div className={styles.root}>
+        <div className={styles.sectionHead}>
+          <h2 id={headingId} className={styles.sectionTitle}>
+            Your history
+          </h2>
+        </div>
+        <div className={styles.table} aria-busy="true" aria-live="polite">
+          <div className={styles.thead} role="row">
+            <span role="columnheader">Article</span>
+            <span role="columnheader">Sentiment</span>
+            <span role="columnheader" className={styles.theadRight}>
+              Date
+            </span>
+          </div>
+          {Array.from({ length: 5 }, (_, i) => (
+            <div key={i} className={cx(styles.row, density === "compact" && styles.rowCompact)}>
+              <div className={styles.rowMain}>
+                <Skeleton h={12} w="86%" style={{ marginBottom: 6 }} />
+                <Skeleton h={10} w="40%" />
+              </div>
+              <div>
+                <Skeleton h={18} w={84} style={{ borderRadius: 999 }} />
+              </div>
+              <div className={styles.rowDate}>
+                <Skeleton h={10} w={40} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (totalCount === 0) {
     return (
       <div className={styles.root}>

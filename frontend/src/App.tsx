@@ -179,6 +179,7 @@ export function App() {
               isMobile={isMobile}
               onSwitchToSearch={() => setTab("search")}
               headingId="history-heading"
+              loading={history.isLoading}
             />
           </aside>
         )}
