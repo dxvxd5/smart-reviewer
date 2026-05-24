@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./EmptyState.module.css";
+import { cx } from "../../lib/cx";
 
 type Variant = "default" | "noresults" | "error";
 
@@ -39,7 +40,7 @@ export function EmptyState({ variant = "default", title, body, icon, children }:
   return (
     <div className={styles.empty}>
       {showIcon && (
-        <div className={`${styles.mark} ${MARK_CLASS[variant]}`} aria-hidden="true">
+        <div className={cx(styles.mark, MARK_CLASS[variant])} aria-hidden="true">
           {icon ?? (variant === "error" ? "!" : <DefaultIcon />)}
         </div>
       )}
