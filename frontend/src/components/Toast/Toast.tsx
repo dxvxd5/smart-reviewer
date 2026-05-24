@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./Toast.module.css";
+import { cx } from "../../lib/cx";
 
 export type ToastKind = "success" | "error";
 
@@ -72,7 +73,7 @@ export function Toast({ toast, onDismiss }: ToastProps) {
     >
       {rendered && (
         <div
-          className={`${styles.toast} ${styles[kind]} ${phase === "out" ? styles.exiting : ""}`}
+          className={cx(styles.toast, styles[kind], phase === "out" && styles.exiting)}
           role="status"
           onAnimationEnd={() => {
             if (phase === "out") setRendered(null);
