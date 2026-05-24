@@ -6,6 +6,7 @@ import { domainFromUrl } from "../../lib/url";
 import { relativeTime } from "../../lib/relativeTime";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import styles from "./Drawer.module.css";
+import { cx } from "../../lib/cx";
 
 export interface DrawerProps {
   item: HistoryItem | null;
@@ -39,7 +40,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
         ? styles.ruleNeutral
         : styles.ruleNegative;
 
-  const drawerCls = `${styles.drawer} ${isMobile ? styles.sheet : styles.side}`;
+  const drawerCls = cx(styles.drawer, isMobile ? styles.sheet : styles.side);
   const scoreSign = analysis.score > 0 ? "+" : "";
 
   return (
@@ -52,7 +53,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
         aria-modal="true"
         aria-labelledby={titleId}
       >
-        <div className={`${styles.rule} ${ruleCls}`} aria-hidden="true" />
+        <div className={cx(styles.rule, ruleCls)} aria-hidden="true" />
 
         {isMobile && (
           <div className={styles.grabber} aria-hidden="true">
@@ -82,7 +83,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
             {article.title}
           </h2>
 
-          <div className={`${styles.sentiment} ${sentCls}`}>
+          <div className={cx(styles.sentiment, sentCls)}>
             <div className={styles.sentimentLabel}>SENTIMENT</div>
             <div className={styles.sentimentValue}>{s.label}</div>
             <div className={styles.sentimentScore}>
