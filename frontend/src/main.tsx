@@ -6,7 +6,7 @@ import "./styles/reset.css";
 import "./styles/base.css";
 import "./styles/animations.css";
 
-import { PrimitivesPreview } from "./PrimitivesPreview";
+import { App } from "./App";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <PrimitivesPreview />
+      <App />
     </QueryClientProvider>
   </StrictMode>,
 );
