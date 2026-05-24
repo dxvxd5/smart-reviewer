@@ -9,7 +9,6 @@ import {
 } from "./components/HistoryPane/HistoryPane";
 import { Drawer } from "./components/Drawer/Drawer";
 import { TabBar, type TabKey } from "./components/TabBar/TabBar";
-import { Toast, type ToastData } from "./components/Toast/Toast";
 import { SearchResults, type CardState } from "./components/SearchResults/SearchResults";
 import type { ArticleErrorKind } from "./components/ArticleCard/ArticleCard";
 
@@ -52,7 +51,6 @@ export function App() {
   const [tab, setTab] = useState<TabKey>("search");
   const [filter, setFilter] = useState<HistoryFilter>("all");
   const [selected, setSelected] = useState<HistoryItem | null>(null);
-  const [toast, setToast] = useState<ToastData | null>(null);
   const [cardStates, setCardStates] = useState<Record<string, CardState>>({});
   const [cacheHits, setCacheHits] = useState(0);
 
@@ -93,19 +91,12 @@ export function App() {
     setCard(article.url, { state: "analyzing" });
     analyze.mutate(article, {
       onSuccess: (res) => {
-        const synthetic = toHistoryItem(res.article, res.analysis, res.originallyAnalyzedAt);
         if (res.cached) {
           setCacheHits((n) => n + 1);
           setCard(article.url, {
             state: "cached",
             analysis: res.analysis,
             cachedFrom: { date: relativeTime(res.originallyAnalyzedAt) },
-          });
-          setToast({
-            kind: "success",
-            title: "Already in your history",
-            body: `Originally analyzed ${relativeTime(res.originallyAnalyzedAt)}`,
-            action: { label: "View", onClick: () => setSelected(synthetic) },
           });
         } else {
           setCard(article.url, { state: "analyzed", analysis: res.analysis });
@@ -196,8 +187,6 @@ export function App() {
       {isMobile && <TabBar active={tab} onChange={setTab} historyCount={historyItems.length} />}
 
       <Drawer item={selected} onClose={() => setSelected(null)} isMobile={isMobile} />
-
-      <Toast toast={toast} onDismiss={() => setToast(null)} />
     </div>
   );
 }
