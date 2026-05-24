@@ -6,6 +6,7 @@ import { Spinner } from "../Spinner/Spinner";
 import { domainFromUrl } from "../../lib/url";
 import { relativeTime } from "../../lib/relativeTime";
 import styles from "./ArticleCard.module.css";
+import { cx } from "../../lib/cx";
 
 export type ArticleCardState = "idle" | "analyzing" | "analyzed" | "cached" | "error";
 
@@ -53,20 +54,14 @@ export function ArticleCard({
   const errCopy = state === "error" ? ERROR_COPY[error ?? "network"] : null;
   const domain = domainFromUrl(article.url);
 
-  const rootCls = [styles.root, analyzed ? styles.analyzed : ""]
-    .filter(Boolean)
-    .join(" ");
+  const rootCls = cx(styles.root, analyzed && styles.analyzed);
 
-  const ruleCls =
-    analyzed && analysis
-      ? `${styles.rule} ${
-          analysis.sentiment === "positive"
-            ? styles.rulePositive
-            : analysis.sentiment === "neutral"
-              ? styles.ruleNeutral
-              : styles.ruleNegative
-        }`
-      : styles.rule;
+  const ruleCls = cx(
+    styles.rule,
+    analyzed && analysis && analysis.sentiment === "positive" && styles.rulePositive,
+    analyzed && analysis && analysis.sentiment === "neutral" && styles.ruleNeutral,
+    analyzed && analysis && analysis.sentiment === "negative" && styles.ruleNegative,
+  );
 
   return (
     <article className={rootCls}>
@@ -134,7 +129,7 @@ export function ArticleCard({
         )}
 
         {analyzed && analysis ? (
-          <div className={`${styles.actions} ${styles.actionsAnalyzed}`}>
+          <div className={cx(styles.actions, styles.actionsAnalyzed)}>
             <SentimentPill
               sentiment={analysis.sentiment}
               score={analysis.score}
@@ -178,7 +173,7 @@ export function ArticleCard({
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.extLink} ${styles.extLinkMuted}`}
+              className={cx(styles.extLink, styles.extLinkMuted)}
             >
               Read original <span aria-hidden="true">↗</span>
               <span className="sr-only">(opens in new tab)</span>
@@ -219,7 +214,7 @@ export function ArticleCard({
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.extLink} ${styles.extLinkMuted}`}
+              className={cx(styles.extLink, styles.extLinkMuted)}
             >
               Read original <span aria-hidden="true">↗</span>
               <span className="sr-only">(opens in new tab)</span>
