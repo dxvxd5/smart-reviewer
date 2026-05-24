@@ -6,6 +6,8 @@ import "./styles/reset.css";
 import "./styles/base.css";
 import "./styles/animations.css";
 
+import { PrimitivesPreview } from "./PrimitivesPreview";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -18,12 +20,7 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <div style={{ padding: "var(--sp-6)", fontFamily: "var(--serif)" }}>
-        <h1 style={{ fontSize: 32, color: "var(--ink)" }}>Smart Reviewer</h1>
-        <p style={{ color: "var(--ink2)", marginTop: "var(--sp-3)" }}>
-          API layer ready. Components coming next.
-        </p>
-      </div>
+      <PrimitivesPreview />
     </QueryClientProvider>
   </StrictMode>,
 );
