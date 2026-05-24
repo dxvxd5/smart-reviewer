@@ -14,3 +14,13 @@ export function ResultsSkeleton() {
     </div>
   );
 }
+
+export function ResultsSkeletonList({ count = 5 }: { count?: number }) {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => (
+        <ResultsSkeleton key={i} />
+      ))}
+    </>
+  );
+}

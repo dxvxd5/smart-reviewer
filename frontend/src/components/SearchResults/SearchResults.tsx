@@ -4,7 +4,7 @@ import {
   type ArticleErrorKind,
 } from "../ArticleCard/ArticleCard";
 import { EmptyState } from "../EmptyState/EmptyState";
-import { ResultsSkeleton } from "../ResultsSkeleton/ResultsSkeleton";
+import { ResultsSkeletonList } from "../ResultsSkeleton/ResultsSkeleton";
 import type { useNewsSearch } from "../../hooks/useNewsSearch";
 import type { Analysis, Article } from "../../types";
 import styles from "./SearchResults.module.css";
@@ -82,9 +82,7 @@ export function SearchResults({
     return (
       <>
         {heading}
-        <ResultsSkeleton />
-        <ResultsSkeleton />
-        <ResultsSkeleton />
+        <ResultsSkeletonList />
       </>
     );
   }
