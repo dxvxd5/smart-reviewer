@@ -14,6 +14,10 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active: boolean
     if (!active || !ref.current) return;
     const node = ref.current;
     const previouslyFocused = document.activeElement as HTMLElement | null;
+    // Only restore focus on cleanup if the opener was keyboard-focused; restoring
+    // after a mouse opener would surface an unwanted focus ring (the Esc keystroke
+    // flips :focus-visible's modality to keyboard before we re-focus).
+    const shouldRestoreFocus = !!previouslyFocused?.matches?.(":focus-visible");
 
     const getFocusable = (): HTMLElement[] =>
       Array.from(node.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
@@ -41,7 +45,11 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active: boolean
 
     return () => {
       node.removeEventListener("keydown", onKey);
-      if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+      if (
+        shouldRestoreFocus &&
+        previouslyFocused &&
+        typeof previouslyFocused.focus === "function"
+      ) {
         previouslyFocused.focus();
       }
     };
