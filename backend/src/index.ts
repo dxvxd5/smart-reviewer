@@ -44,7 +44,11 @@ async function bootstrap() {
   app.use(errorHandler);
 
   app.listen(env.PORT, () => {
-    console.log(`🚀 Backend listening on http://localhost:${env.PORT}`);
+    if (env.NODE_ENV === "development") {
+      console.log(`🚀 Backend listening on http://localhost:${env.PORT}`);
+    } else {
+      console.log(`🚀 Backend listening on port ${env.PORT}`);
+    }
   });
 }
 
