@@ -1,5 +1,3 @@
-// useAnalyzeArticle.ts — mutation hook for triggering article analysis.
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { analyzeArticle } from "../api/articles";

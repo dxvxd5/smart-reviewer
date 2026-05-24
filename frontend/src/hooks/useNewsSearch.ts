@@ -1,5 +1,3 @@
-// useNewsSearch.ts — debounced news search backed by TanStack Query.
-
 import { useQuery } from "@tanstack/react-query";
 
 import { searchNews } from "../api/news";
