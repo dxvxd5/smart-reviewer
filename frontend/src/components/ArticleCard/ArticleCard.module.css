@@ -52,13 +52,13 @@
   align-items: center;
   gap: var(--sp-2);
   margin-bottom: 6px;
-  font-size: 12px;
+  font-size: var(--fs-12);
   color: var(--ink3);
   flex-wrap: wrap;
 }
 .source {
   color: var(--ink2);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 .ago {
   white-space: nowrap;
@@ -73,8 +73,8 @@
   border-radius: var(--r-pill);
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--fs-11);
+  font-weight: var(--fw-medium);
   transition: filter var(--d-fast);
 }
 .cached:hover {
@@ -83,22 +83,22 @@
 
 .title {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 1.25;
-  letter-spacing: -0.005em;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-17);
+  line-height: var(--lh-125);
+  letter-spacing: var(--ls-tightish);
   color: var(--ink);
   text-wrap: pretty;
   margin-bottom: 6px;
 }
 .analyzed .title {
-  font-size: 20px;
+  font-size: var(--fs-20);
 }
 
 .snippet,
 .summary {
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: var(--fs-14);
+  line-height: var(--lh-150);
   color: var(--ink2);
   text-wrap: pretty;
   margin-bottom: 12px;
@@ -118,15 +118,15 @@
   align-items: center;
   gap: var(--sp-2);
   margin-bottom: var(--sp-2);
-  font-size: 12.5px;
+  font-size: var(--fs-13);
   color: var(--accent);
 }
 
 .error {
   margin-bottom: 12px;
   padding: 12px 14px;
-  background: #fdf3ef;
-  border: 1px solid #f0d4ca;
+  background: var(--surface-error);
+  border: 1px solid var(--rule-error);
   border-radius: var(--r-md);
   display: flex;
   gap: var(--sp-3);
@@ -142,24 +142,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--fs-13);
+  font-weight: var(--fw-bold);
 }
 .errorBody {
   flex: 1;
   min-width: 0;
 }
 .errorTitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: #7a3322;
+  font-size: var(--fs-13);
+  font-weight: var(--fw-semibold);
+  color: var(--ink-error);
   margin-bottom: 2px;
 }
 .errorSub {
-  font-size: 12.5px;
-  color: #7a3322;
+  font-size: var(--fs-13);
+  color: var(--ink-error);
   opacity: 0.85;
-  line-height: 1.45;
+  line-height: var(--lh-145);
 }
 
 .actions {
@@ -174,7 +174,7 @@
   border-top: 1px dashed var(--rule);
 }
 .actionsNote {
-  font-size: 12px;
+  font-size: var(--fs-12);
   color: var(--ink3);
 }
 
@@ -183,8 +183,8 @@
   color: var(--paper);
   padding: 8px 14px;
   border-radius: var(--r-pill);
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: var(--fs-13);
+  font-weight: var(--fw-medium);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -199,14 +199,14 @@
 }
 
 .extLink {
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: var(--fs-13);
+  font-weight: var(--fw-medium);
   color: var(--accent);
   margin-left: auto;
 }
 .extLinkMuted {
   color: var(--ink3);
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   margin-left: 0;
   padding: 8px var(--sp-1);
 }
