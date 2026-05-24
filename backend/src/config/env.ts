@@ -1,0 +1,21 @@
+import "dotenv/config";
+import { z } from "zod";
+
+const EnvSchema = z.object({
+  PORT: z.coerce.number().default(4000),
+  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  CORS_ORIGIN: z.string().default("http://localhost:5173"),
+  MONGODB_URI: z.string().min(1, "MONGODB_URI is required"),
+  GNEWS_API_KEY: z.string().min(1, "GNEWS_API_KEY is required"),
+  GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
+});
+
+const parsed = EnvSchema.safeParse(process.env);
+
+if (!parsed.success) {
+  console.error("❌ Invalid environment variables:");
+  console.error(parsed.error.flatten().fieldErrors);
+  process.exit(1);
+}
+
+export const env = parsed.data;
