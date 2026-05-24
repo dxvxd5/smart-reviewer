@@ -8,7 +8,7 @@ Single-page app that searches news, summarizes articles + scores sentiment via G
 - **Backend:** Node 20 + Express + TypeScript + Mongoose + Zod
 - **DB:** MongoDB Atlas (M0 free tier)
 - **News:** GNews.io
-- **GenAI:** Google Gemini 2.0 Flash
+- **GenAI:** Google Gemini 2.5 Flash
 
 See [PLAN.md](./PLAN.md) for the full project plan.
 
