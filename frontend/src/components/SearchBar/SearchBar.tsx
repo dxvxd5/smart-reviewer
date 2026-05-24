@@ -10,7 +10,6 @@ export interface SearchBarProps {
   loading?: boolean;
   placeholder?: string;
   inputRef?: RefObject<HTMLInputElement | null>;
-  showKbd?: boolean;
   variant?: "desktop" | "mobile";
 }
 
@@ -21,7 +20,6 @@ export function SearchBar({
   loading = false,
   placeholder = "Search news…",
   inputRef,
-  showKbd = true,
   variant = "desktop",
 }: SearchBarProps) {
   const cls = cx(styles.root, variant === "mobile" && styles.mobile, loading && styles.loading);
@@ -67,12 +65,6 @@ export function SearchBar({
         <button type="button" className={styles.clear} onClick={onClear} aria-label="Clear search">
           ×
         </button>
-      )}
-
-      {showKbd && (
-        <span className={styles.kbd} aria-hidden="true">
-          ⌘ K
-        </span>
       )}
     </div>
   );
