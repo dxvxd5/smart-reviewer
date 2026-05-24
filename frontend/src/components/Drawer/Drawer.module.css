@@ -1,0 +1,216 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 15, 0.35);
+  z-index: var(--z-backdrop);
+  animation: var(--anim-fade-in) 0.2s ease-out;
+}
+
+.drawer {
+  position: fixed;
+  background: var(--paper);
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+}
+
+.side {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 92vw);
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.12);
+  animation: var(--anim-drawer-in) 0.28s var(--ease);
+}
+
+.sheet {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 90vh;
+  max-height: 90vh;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.18);
+  animation: var(--anim-sheet-up) 0.3s var(--ease);
+}
+
+.rule {
+  height: 4px;
+  flex-shrink: 0;
+}
+.sheet .rule {
+  border-radius: 20px 20px 0 0;
+}
+.rulePositive {
+  background: var(--pos);
+}
+.ruleNeutral {
+  background: var(--neu);
+}
+.ruleNegative {
+  background: var(--neg);
+}
+
+.grabber {
+  display: flex;
+  justify-content: center;
+  padding: var(--sp-2) 0 0;
+}
+.grabber span {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--rule2);
+}
+
+.header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.source {
+  font-size: 12.5px;
+  color: var(--ink2);
+  font-weight: 500;
+}
+.sep,
+.date {
+  font-size: 12px;
+  color: var(--ink3);
+}
+
+.close {
+  margin-left: auto;
+  font-size: 20px;
+  color: var(--ink3);
+  padding: 0 var(--sp-1);
+  line-height: 1;
+  transition: color var(--d-fast);
+}
+.close:hover {
+  color: var(--ink);
+}
+
+.content {
+  padding: 20px 24px;
+  overflow: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.sentiment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+}
+.sentimentPositive {
+  background: var(--pos-soft);
+}
+.sentimentNeutral {
+  background: var(--neu-soft);
+}
+.sentimentNegative {
+  background: var(--neg-soft);
+}
+
+.sentimentLabel {
+  font-size: 10px;
+  color: var(--ink2);
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+.sentimentValue {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 500;
+}
+.sentimentPositive .sentimentValue {
+  color: var(--pos);
+}
+.sentimentNeutral .sentimentValue {
+  color: var(--neu);
+}
+.sentimentNegative .sentimentValue {
+  color: var(--neg);
+}
+
+.sentimentScore {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.sectionLabel {
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.summary {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: #3a342c;
+  text-wrap: pretty;
+}
+.reasoning {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #6b6359;
+  text-wrap: pretty;
+}
+
+.footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.cta {
+  flex: 1;
+  text-align: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r-pill);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.cta:hover {
+  opacity: 0.92;
+}
+.secondary {
+  background: transparent;
+  color: #3a342c;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.secondary:hover {
+  background: var(--card);
+}
