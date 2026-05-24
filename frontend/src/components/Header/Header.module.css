@@ -25,21 +25,21 @@
   justify-content: center;
   color: var(--paper);
   font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--fs-18);
+  font-weight: var(--fw-semibold);
   transition: background var(--d-base);
   flex-shrink: 0;
 }
 
 .title {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.01em;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-22);
+  letter-spacing: var(--ls-tight);
 }
 
 .counter {
-  font-size: 13px;
+  font-size: var(--fs-13);
   color: var(--ink3);
   white-space: nowrap;
 }
@@ -67,5 +67,5 @@
 }
 .mobile .counter {
   display: block;
-  font-size: 12px;
+  font-size: var(--fs-12);
 }
