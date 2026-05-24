@@ -103,6 +103,15 @@
   color: var(--ink);
 }
 
+.hero {
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface-muted, var(--rule));
+  background-size: cover;
+  background-position: center;
+}
+
 .content {
   padding: 20px 24px;
   overflow: auto;
@@ -219,6 +228,8 @@
   padding: 10px 14px;
   font-size: var(--fs-13);
   font-weight: var(--fw-medium);
+  min-width: 124px;
+  text-align: center;
 }
 .secondary:hover {
   background: var(--card);

@@ -21,11 +21,13 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const [displayItem, setDisplayItem] = useState<HistoryItem | null>(item);
   const [closing, setClosing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Sync open: render the new item immediately when one arrives.
   if (item && item !== displayItem) {
     setDisplayItem(item);
     setClosing(false);
+    setCopied(false);
   }
 
   // Sync close: when the item goes away, start the exit timer once.
@@ -41,6 +43,12 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
     }, EXIT_MS);
     return () => window.clearTimeout(t);
   }, [closing]);
+
+  useEffect(() => {
+    if (!copied) return;
+    const t = window.setTimeout(() => setCopied(false), 2000);
+    return () => window.clearTimeout(t);
+  }, [copied]);
 
   useFocusTrap(dialogRef, !!item);
   useEscapeKey(onClose, !!item);
@@ -110,6 +118,14 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
           </button>
         </header>
 
+        {article.image && (
+          <div
+            className={styles.hero}
+            style={{ backgroundImage: `url(${article.image})` }}
+            aria-hidden="true"
+          />
+        )}
+
         <div className={styles.content}>
           <h2 id={titleId} className={styles.title}>
             {article.title}
@@ -145,9 +161,17 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
           <button
             type="button"
             className={styles.secondary}
-            onClick={() => void navigator.clipboard?.writeText(analysis.summary)}
+            onClick={async () => {
+              try {
+                await navigator.clipboard?.writeText(analysis.summary);
+                setCopied(true);
+              } catch {
+                // Clipboard unavailable (insecure context / denied) — silently no-op.
+              }
+            }}
+            aria-live="polite"
           >
-            Copy summary
+            {copied ? "Copied!" : "Copy summary"}
           </button>
         </footer>
       </aside>

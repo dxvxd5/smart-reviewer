@@ -122,7 +122,14 @@ export function ArticleCard({
           </div>
         )}
 
-        {analyzed && analysis && <p className={styles.summary}>{analysis.summary}</p>}
+        {analyzed && analysis && (
+          <div className={styles.summaryBlock}>
+            <div className={styles.summaryLabel} aria-hidden="true">
+              <span className={styles.summaryMark}>✦</span> AI summary
+            </div>
+            <p className={styles.summary}>{analysis.summary}</p>
+          </div>
+        )}
 
         {state === "idle" && article.description && (
           <p className={styles.snippet}>{article.description}</p>
