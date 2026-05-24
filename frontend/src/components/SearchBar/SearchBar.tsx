@@ -1,5 +1,6 @@
 import { type RefObject } from "react";
 import { Spinner } from "../Spinner/Spinner";
+import { SearchIcon } from "../icons/SearchIcon";
 import styles from "./SearchBar.module.css";
 import { cx } from "../../lib/cx";
 
@@ -31,21 +32,7 @@ export function SearchBar({
       </label>
 
       <span className={styles.icon} aria-hidden="true">
-        {loading ? (
-          <Spinner size={15} color="var(--accent)" />
-        ) : (
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--ink3)"
-            strokeWidth="2"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3-3" />
-          </svg>
-        )}
+        {loading ? <Spinner size={15} color="var(--accent)" /> : <SearchIcon />}
       </span>
 
       <input
