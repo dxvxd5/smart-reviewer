@@ -1,6 +1,7 @@
 import { type RefObject } from "react";
 import { SearchBar } from "../SearchBar/SearchBar";
 import styles from "./Header.module.css";
+import { cx } from "../../lib/cx";
 
 export interface HeaderProps {
   query: string;
@@ -24,7 +25,7 @@ export function Header({
   cacheHits,
 }: HeaderProps) {
   return (
-    <header className={`${styles.root} ${isMobile ? styles.mobile : ""}`.trim()}>
+    <header className={cx(styles.root, isMobile && styles.mobile)}>
       <a href="#" className={styles.brand} aria-label="Smart Reviewer home">
         <span className={styles.logo} aria-hidden="true">
           S
