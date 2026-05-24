@@ -23,7 +23,7 @@ function buildPrompt(article: SearchedArticle): string {
     "",
     "Required JSON shape:",
     "{",
-    '  "summary": "2-3 sentence neutral summary of the article",',
+    '  "summary": "6-8 sentence neutral summary of the article",',
     '  "sentiment": "positive" | "neutral" | "negative",',
     '  "score": number in [-1, 1] (negative = bearish/critical, positive = bullish/optimistic, 0 = neutral),',
     '  "reasoning": "one sentence explaining the sentiment label"',
