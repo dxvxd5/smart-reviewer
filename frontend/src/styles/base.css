@@ -3,6 +3,9 @@
    Components consume these via var(--name); never hardcode the underlying values. */
 
 :root {
+  /* Layout */
+  --header-h: 64px;
+
   /* Surfaces */
   --paper: #fbf9f4;
   --card: #ffffff;

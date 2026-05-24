@@ -26,8 +26,8 @@
   flex-direction: column;
   min-height: 0;
   position: sticky;
-  top: var(--sp-5);
-  max-height: calc(100vh - var(--sp-7) - var(--sp-5));
+  top: calc(var(--header-h) + var(--sp-5));
+  max-height: calc(100vh - var(--header-h) - var(--sp-7) - var(--sp-5));
 }
 
 @media (max-width: 1100px) {

@@ -50,6 +50,16 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
     return () => window.clearTimeout(t);
   }, [copied]);
 
+  // Lock body scroll while the drawer is open so the page behind doesn't move.
+  useEffect(() => {
+    if (!item) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [item]);
+
   useFocusTrap(dialogRef, !!item);
   useEscapeKey(onClose, !!item);
 
