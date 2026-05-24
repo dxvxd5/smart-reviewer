@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { isAxiosError } from "axios";
 
 import { Header } from "./components/Header/Header";
@@ -85,72 +85,63 @@ export function App() {
     [historyItems, filter],
   );
 
-  const setCard = useCallback((url: string, next: CardState) => {
+  const setCard = (url: string, next: CardState) => {
     setCardStates((prev) => ({ ...prev, [url]: next }));
-  }, []);
+  };
 
-  const handleAnalyze = useCallback(
-    (article: Article) => {
-      setCard(article.url, { state: "analyzing" });
-      analyze.mutate(article, {
-        onSuccess: (res) => {
-          const synthetic = toHistoryItem(res.article, res.analysis, res.originallyAnalyzedAt);
-          if (res.cached) {
-            setCacheHits((n) => n + 1);
-            setCard(article.url, {
-              state: "cached",
-              analysis: res.analysis,
-              cachedFrom: { date: relativeTime(res.originallyAnalyzedAt) },
-            });
-            setToast({
-              kind: "success",
-              title: "Already in your history",
-              body: `Originally analyzed ${relativeTime(res.originallyAnalyzedAt)}`,
-              action: { label: "View", onClick: () => setSelected(synthetic) },
-            });
-          } else {
-            setCard(article.url, { state: "analyzed", analysis: res.analysis });
-          }
-        },
-        onError: (err) => {
-          setCard(article.url, { state: "error", error: errorKindFrom(err) });
-        },
-      });
-    },
-    [analyze, setCard],
-  );
+  const handleAnalyze = (article: Article) => {
+    setCard(article.url, { state: "analyzing" });
+    analyze.mutate(article, {
+      onSuccess: (res) => {
+        const synthetic = toHistoryItem(res.article, res.analysis, res.originallyAnalyzedAt);
+        if (res.cached) {
+          setCacheHits((n) => n + 1);
+          setCard(article.url, {
+            state: "cached",
+            analysis: res.analysis,
+            cachedFrom: { date: relativeTime(res.originallyAnalyzedAt) },
+          });
+          setToast({
+            kind: "success",
+            title: "Already in your history",
+            body: `Originally analyzed ${relativeTime(res.originallyAnalyzedAt)}`,
+            action: { label: "View", onClick: () => setSelected(synthetic) },
+          });
+        } else {
+          setCard(article.url, { state: "analyzed", analysis: res.analysis });
+        }
+      },
+      onError: (err) => {
+        setCard(article.url, { state: "error", error: errorKindFrom(err) });
+      },
+    });
+  };
 
-  const cardFor = useCallback(
-    (article: Article): CardState => {
-      const userState = cardStates[article.url];
-      if (userState) return userState;
-      const hit = historyByUrl.get(article.url);
-      if (hit) {
-        return {
-          state: "cached",
-          analysis: hit.analysis,
-          cachedFrom: { date: relativeTime(hit.originallyAnalyzedAt) },
-        };
-      }
-      return { state: "idle" };
-    },
-    [cardStates, historyByUrl],
-  );
+  const cardFor = (article: Article): CardState => {
+    const userState = cardStates[article.url];
+    if (userState) return userState;
+    const hit = historyByUrl.get(article.url);
+    if (hit) {
+      return {
+        state: "cached",
+        analysis: hit.analysis,
+        cachedFrom: { date: relativeTime(hit.originallyAnalyzedAt) },
+      };
+    }
+    return { state: "idle" };
+  };
 
-  const openCachedDrawer = useCallback(
-    (article: Article) => {
-      const hit = historyByUrl.get(article.url);
-      const local = cardStates[article.url];
-      if (hit) {
-        setSelected(hit);
-      } else if (local?.analysis) {
-        setSelected(
-          toHistoryItem(article, local.analysis, new Date(Date.now() - 1000).toISOString()),
-        );
-      }
-    },
-    [historyByUrl, cardStates],
-  );
+  const openCachedDrawer = (article: Article) => {
+    const hit = historyByUrl.get(article.url);
+    const local = cardStates[article.url];
+    if (hit) {
+      setSelected(hit);
+    } else if (local?.analysis) {
+      setSelected(
+        toHistoryItem(article, local.analysis, new Date(Date.now() - 1000).toISOString()),
+      );
+    }
+  };
 
   const showSearchPane = !isMobile || tab === "search";
   const showHistoryPane = !isMobile || tab === "history";
@@ -171,7 +162,7 @@ export function App() {
 
       <main className={styles.main}>
         {showSearchPane && (
-          <section className={styles.results} id="pane-search" aria-labelledby="tab-search">
+          <section className={styles.results} aria-labelledby="search-heading">
             <SearchResults
               query={query}
               search={search}
@@ -180,12 +171,13 @@ export function App() {
               onAnalyze={handleAnalyze}
               onOpenCached={openCachedDrawer}
               onFocusSearch={() => inputRef.current?.focus()}
+              headingId="search-heading"
             />
           </section>
         )}
 
         {showHistoryPane && (
-          <aside className={styles.sidebar} id="pane-history" aria-labelledby="tab-history">
+          <aside className={styles.sidebar} aria-labelledby="history-heading">
             <HistoryPane
               history={filteredHistory}
               totalCount={historyItems.length}
@@ -195,6 +187,7 @@ export function App() {
               onSelect={setSelected}
               isMobile={isMobile}
               onSwitchToSearch={() => setTab("search")}
+              headingId="history-heading"
             />
           </aside>
         )}

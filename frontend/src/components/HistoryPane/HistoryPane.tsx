@@ -40,6 +40,7 @@ export interface HistoryPaneProps {
   pillVariant?: "soft" | "outline" | "dot";
   isMobile?: boolean;
   onSwitchToSearch?: () => void;
+  headingId?: string;
 }
 
 export function HistoryPane({
@@ -53,12 +54,15 @@ export function HistoryPane({
   pillVariant = "soft",
   isMobile = false,
   onSwitchToSearch,
+  headingId,
 }: HistoryPaneProps) {
   if (totalCount === 0) {
     return (
       <div className={styles.root}>
         <div className={styles.sectionHead}>
-          <h2 className={styles.sectionTitle}>Your history</h2>
+          <h2 id={headingId} className={styles.sectionTitle}>
+            Your history
+          </h2>
         </div>
         <div className={styles.empty}>
           <div className={styles.emptyIcon} aria-hidden="true">
@@ -93,7 +97,9 @@ export function HistoryPane({
   return (
     <div className={styles.root}>
       <div className={styles.sectionHead}>
-        <h2 className={styles.sectionTitle}>Your history</h2>
+        <h2 id={headingId} className={styles.sectionTitle}>
+          Your history
+        </h2>
         <span className={styles.sectionMeta}>{totalCount} articles</span>
       </div>
 
