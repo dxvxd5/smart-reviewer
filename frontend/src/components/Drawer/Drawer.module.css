@@ -5,6 +5,9 @@
   z-index: var(--z-backdrop);
   animation: var(--anim-fade-in) 0.2s ease-out;
 }
+.backdropExit {
+  animation: var(--anim-fade-out) 0.2s ease-out forwards;
+}
 
 .drawer {
   position: fixed;
@@ -22,6 +25,9 @@
   box-shadow: var(--shadow-side);
   animation: var(--anim-drawer-in) 0.28s var(--ease);
 }
+.sideExit {
+  animation: var(--anim-drawer-out) 0.22s var(--ease) forwards;
+}
 
 .sheet {
   left: 0;
@@ -33,6 +39,9 @@
   border-radius: 20px 20px 0 0;
   box-shadow: var(--shadow-sheet);
   animation: var(--anim-sheet-up) 0.3s var(--ease);
+}
+.sheetExit {
+  animation: var(--anim-sheet-down) 0.24s var(--ease) forwards;
 }
 
 .rule {

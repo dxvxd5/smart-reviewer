@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HistoryItem } from "../../types";
 import { Favicon } from "../Favicon/Favicon";
 import { SENT } from "../../lib/sentiment";
 import { domainFromUrl } from "../../lib/url";
 import { relativeTime } from "../../lib/relativeTime";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import styles from "./Drawer.module.css";
 import { cx } from "../../lib/cx";
 
@@ -14,16 +15,42 @@ export interface DrawerProps {
   isMobile?: boolean;
 }
 
+const EXIT_MS = 240;
+
 export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const [displayItem, setDisplayItem] = useState<HistoryItem | null>(item);
+  const [closing, setClosing] = useState(false);
+
+  // Sync open: render the new item immediately when one arrives.
+  if (item && item !== displayItem) {
+    setDisplayItem(item);
+    setClosing(false);
+  }
+
+  // Sync close: when the item goes away, start the exit timer once.
+  if (!item && displayItem && !closing) {
+    setClosing(true);
+  }
+
+  useEffect(() => {
+    if (!closing) return;
+    const t = window.setTimeout(() => {
+      setDisplayItem(null);
+      setClosing(false);
+    }, EXIT_MS);
+    return () => window.clearTimeout(t);
+  }, [closing]);
+
   useFocusTrap(dialogRef, !!item);
+  useEscapeKey(onClose, !!item);
 
-  if (!item) return null;
+  if (!displayItem) return null;
 
-  const { article, analysis } = item;
+  const { article, analysis } = displayItem;
   const s = SENT[analysis.sentiment];
-  const titleId = `drawer-title-${item.id}`;
-  const date = relativeTime(item.originallyAnalyzedAt);
+  const titleId = `drawer-title-${displayItem.id}`;
+  const date = relativeTime(displayItem.originallyAnalyzedAt);
   const domain = domainFromUrl(article.url);
 
   const sentCls =
@@ -40,12 +67,17 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
         ? styles.ruleNeutral
         : styles.ruleNegative;
 
-  const drawerCls = cx(styles.drawer, isMobile ? styles.sheet : styles.side);
+  const drawerCls = cx(
+    styles.drawer,
+    isMobile ? styles.sheet : styles.side,
+    closing && (isMobile ? styles.sheetExit : styles.sideExit),
+  );
+  const backdropCls = cx(styles.backdrop, closing && styles.backdropExit);
   const scoreSign = analysis.score > 0 ? "+" : "";
 
   return (
     <>
-      <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
+      <div className={backdropCls} onClick={onClose} aria-hidden="true" />
       <aside
         ref={dialogRef}
         className={drawerCls}

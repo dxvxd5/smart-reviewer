@@ -138,6 +138,9 @@
   --anim-toast-out: sr-toast-out;
   --anim-drawer-in: sr-drawer-in;
   --anim-sheet-up: sr-sheet-up;
+  --anim-fade-out: sr-fade-out;
+  --anim-drawer-out: sr-drawer-out;
+  --anim-sheet-down: sr-sheet-down;
 }
 
 body {
