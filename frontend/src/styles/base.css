@@ -59,6 +59,16 @@
   --z-drawer: 91;
   --z-backdrop: 90;
   --z-tabbar: 80;
+
+  /* Animation names — routed through var() so CSS Modules don't scope them */
+  --anim-spin: sr-spin;
+  --anim-shimmer: sr-shimmer;
+  --anim-fade-in: sr-fade-in;
+  --anim-fade-up: sr-fade-up;
+  --anim-toast-in: sr-toast-in;
+  --anim-toast-out: sr-toast-out;
+  --anim-drawer-in: sr-drawer-in;
+  --anim-sheet-up: sr-sheet-up;
 }
 
 body {
