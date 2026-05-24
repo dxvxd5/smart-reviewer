@@ -1,6 +1,7 @@
 import { type RefObject } from "react";
 import { Spinner } from "../Spinner/Spinner";
 import styles from "./SearchBar.module.css";
+import { cx } from "../../lib/cx";
 
 export interface SearchBarProps {
   value: string;
@@ -23,13 +24,7 @@ export function SearchBar({
   showKbd = true,
   variant = "desktop",
 }: SearchBarProps) {
-  const cls = [
-    styles.root,
-    variant === "mobile" ? styles.mobile : "",
-    loading ? styles.loading : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const cls = cx(styles.root, variant === "mobile" && styles.mobile, loading && styles.loading);
 
   return (
     <div className={cls}>
