@@ -197,9 +197,6 @@ export function HistoryPane({
 function FootnoteCache() {
   return (
     <div className={styles.foot}>
-      <span aria-hidden="true" style={{ color: "var(--accent)" }}>
-        ✓
-      </span>
       <span>Articles you've already analyzed return instantly — no new AI call</span>
     </div>
   );
