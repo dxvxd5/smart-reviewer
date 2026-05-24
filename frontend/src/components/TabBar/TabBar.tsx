@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./TabBar.module.css";
+import { cx } from "../../lib/cx";
 
 export type TabKey = "search" | "history";
 
@@ -61,7 +62,7 @@ export function TabBar({ active, onChange, historyCount }: TabBarProps) {
     <nav className={styles.root} role="tablist" aria-label="Primary">
       {tabs.map((t) => {
         const isActive = active === t.k;
-        const cls = `${styles.tab} ${isActive ? styles.active : ""}`.trim();
+        const cls = cx(styles.tab, isActive && styles.active);
         return (
           <button
             key={t.k}
