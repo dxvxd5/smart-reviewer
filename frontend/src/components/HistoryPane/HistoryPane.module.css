@@ -99,9 +99,14 @@
 }
 .row:last-child {
   border-bottom: none;
+  border-bottom-left-radius: var(--r-lg);
+  border-bottom-right-radius: var(--r-lg);
 }
 .row:hover {
   background: var(--surface-row-zebra);
+}
+.row:focus-visible {
+  outline-offset: -2px;
 }
 .rowCompact {
   padding-top: 7px;
