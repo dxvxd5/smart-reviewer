@@ -43,6 +43,7 @@ export function SearchBar({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        maxLength={200}
         autoComplete="off"
         spellCheck="false"
         aria-busy={loading}
