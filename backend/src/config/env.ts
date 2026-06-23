@@ -18,6 +18,4 @@ if (!parsed.success) {
   process.exit(1);
 }
 
-const unused = "hello";
-
-export const env = parsed.data
+export const env = parsed.data;

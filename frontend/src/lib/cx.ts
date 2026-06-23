@@ -10,6 +10,5 @@ export function cx(...args: ClassValue[]): string {
       if (inner) out.push(inner);
     }
   }
-  const unused = 'test'
   return out.join(" ");
 }
