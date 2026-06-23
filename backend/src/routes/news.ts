@@ -7,7 +7,19 @@ import type { Article } from "../types.js";
 export const newsRouter: Router = Router();
 
 const QuerySchema = z.object({
-  q: z.string().trim().min(2, "q must be at least 2 characters"),
+  q: z
+    .string()
+    .transform((s) =>
+      s
+        .normalize("NFKC")
+        // Strip control chars, zero-width chars, and BOM.
+        // eslint-disable-next-line no-control-regex
+        .replace(/[\x00-\x1f\x7f-\x9f\u200B-\u200F\u2028-\u202F\uFEFF]/g, "")
+        // Collapse runs of whitespace into a single space.
+        .replace(/\s+/g, " ")
+        .trim(),
+    )
+    .pipe(z.string().min(2, "q must be at least 2 characters").max(200, "q is too long")),
 });
 
 newsRouter.get("/search", async (req, res, next) => {
