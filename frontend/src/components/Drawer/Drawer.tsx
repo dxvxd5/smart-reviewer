@@ -67,7 +67,7 @@ export function Drawer({ item, onClose, isMobile = false }: DrawerProps) {
 
   const { article, analysis } = displayItem;
   const s = SENT[analysis.sentiment];
-  const titleId = `drawer-title-${displayItem.id}`;
+  const titleId = `drawer-title-${encodeURIComponent(displayItem.article.url)}`;
   const publishedAt = relativeTime(article.publishedAt);
   const analyzedAt = relativeTime(displayItem.originallyAnalyzedAt);
   const domain = domainFromUrl(article.url);
