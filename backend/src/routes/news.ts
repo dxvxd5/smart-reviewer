@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { ApiError } from "../middleware/error.js";
+import { searchLimiter } from "../middleware/rateLimit.js";
 import { searchNews } from "../services/gnews.js";
 import type { Article } from "../types.js";
 
@@ -10,7 +11,7 @@ const QuerySchema = z.object({
   q: z.string().trim().min(2, "q must be at least 2 characters"),
 });
 
-newsRouter.get("/search", async (req, res, next) => {
+newsRouter.get("/search", searchLimiter, async (req, res, next) => {
   const parsed = QuerySchema.safeParse(req.query);
   if (!parsed.success) {
     return next(ApiError.badRequest(parsed.error.issues[0]?.message ?? "invalid query"));

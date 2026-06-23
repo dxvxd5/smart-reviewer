@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { ApiError } from "../middleware/error.js";
+import { analyzeLimiter } from "../middleware/rateLimit.js";
 import { analyzeOrCache, listHistory } from "../services/articles.js";
 import type { SearchedArticle } from "../services/gnews.js";
 
@@ -19,7 +20,7 @@ const AnalyzeBodySchema = z.object({
   article: ArticleSchema,
 });
 
-articlesRouter.post("/analyze", async (req, res, next) => {
+articlesRouter.post("/analyze", analyzeLimiter, async (req, res, next) => {
   const parsed = AnalyzeBodySchema.safeParse(req.body);
   if (!parsed.success) {
     return next(ApiError.badRequest(parsed.error.issues[0]?.message ?? "invalid body"));
