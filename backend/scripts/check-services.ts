@@ -11,9 +11,11 @@ const GREEN = "\x1b[32m";
 const RED = "\x1b[31m";
 const DIM = "\x1b[2m";
 
+// eslint-disable-next-line no-console
 const ok = (msg: string) => console.log(`${GREEN}✔${RESET} ${msg}`);
 const fail = (msg: string, err: unknown) => {
   const detail = err instanceof Error ? err.message : String(err);
+  // eslint-disable-next-line no-console
   console.log(`${RED}✘${RESET} ${msg}\n  ${DIM}${detail}${RESET}`);
 };
 
@@ -64,10 +66,12 @@ async function checkGemini() {
 }
 
 async function main() {
+  // eslint-disable-next-line no-console
   console.log("Checking external services...\n");
   await checkMongo();
   await checkGNews();
   await checkGemini();
+  // eslint-disable-next-line no-console
   console.log("\nDone.");
   process.exit(0);
 }

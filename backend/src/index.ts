@@ -8,7 +8,7 @@ import { articlesRouter } from "./routes/articles.js";
 
 async function bootstrap() {
   await mongoose.connect(env.MONGODB_URI);
-  console.log("✅ Connected to MongoDB");
+  console.info("✅ Connected to MongoDB");
 
   const app = express();
 
@@ -45,9 +45,9 @@ async function bootstrap() {
 
   app.listen(env.PORT, () => {
     if (env.NODE_ENV === "development") {
-      console.log(`🚀 Backend listening on http://localhost:${env.PORT}`);
+      console.info(`🚀 Backend listening on http://localhost:${env.PORT}`);
     } else {
-      console.log(`🚀 Backend listening on port ${env.PORT}`);
+      console.info(`🚀 Backend listening on port ${env.PORT}`);
     }
   });
 }

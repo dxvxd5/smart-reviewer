@@ -27,5 +27,8 @@ export default defineConfig([
         tsconfigRootDir: __dirname,
       },
     },
+    rules: {
+      "no-console": "error",
+    },
   },
 ]);
