@@ -199,7 +199,7 @@ export function HistoryPane({
             const scoreSign = h.analysis.score > 0 ? "+" : "";
             return (
               <button
-                key={h.id}
+                key={h.article.url}
                 type="button"
                 role="row"
                 onClick={() => onSelect(h)}
